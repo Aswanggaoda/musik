@@ -1,19 +1,59 @@
 FROM debian:latest
 
-# Updating Packages
 RUN apt update && apt upgrade -y
 RUN apt install git curl python3-pip ffmpeg -y
-
-# Copying Requirements
+RUN pip3 install -U pip
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get install -y nodejs && \
+    npm i -g npm
 COPY requirements.txt /requirements.txt
-
-# Installing Requirements
 RUN cd /
-RUN pip3 install --upgrade pip
 RUN pip3 install -U -r requirements.txt
 RUN mkdir /MusicPlayer
 WORKDIR /MusicPlayer
-COPY startup.sh /startup.sh
+COPY start.sh /start.sh
+CMD ["/bin/bash", "/start.sh"]
 
-# Running Music Player Bot
-CMD ["/bin/bash", "/startup.sh"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
